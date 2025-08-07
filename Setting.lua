@@ -3,15 +3,18 @@ local Notice = {
     {date = "2025-08-05", desc = "脚本用不了就受着呗\n玩Xi Pro就要学会受着"},
 }
 local LoadServer = {
-    "最强战场",
     "Blox Fruit",
+    "Fisch",
+    "Doors",
+    "最强战场",
     "疯狂之城",
     "忍者传奇",
     "俄亥俄州",
-    "刀刃球",
     "战争大亨",
-    "Fisch",
-    "Doors",
+    "驾驶帝国",
+    "种植花园",
+    "刀刃球",
+    "压力",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
@@ -23,7 +26,7 @@ local LoadingSteps = {
     {text = "下载游戏数据...", progress = 75},
     {text = "解析配置文件...", progress = 85},
     {text = "准备游戏列表...", progress = 95},
-    {text = "神仇死妈！", progress = 100}
+    {text = "XI Pro 牛逼！", progress = 100}
 }
 local Developers = {
     {name = "神仇", role = "主作者", desc = "项目负责人 · 核心架构", color = Color3.fromRGB(255, 100, 100)},
