@@ -8,56 +8,54 @@ local Players = game:GetService("Players")
 local Player = Players.LocalPlayer
 local PlayerMouse = Player:GetMouse()
 
+
 local redzlib = {
-	Themes = {
-		Darker = {
+    Themes = {
+        Darker = {
             ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(50, 50, 60)), -- 深灰色调
-                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(70, 70, 80)), -- 中性灰色调
-                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(50, 50, 60)) -- 深灰色调
+                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(25, 25, 25)),
+                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
+                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(25, 25, 25))
             }),
-            ["Color Hub 2"] = Color3.fromRGB(60, 60, 70), -- 深灰色
-            ["Color Stroke"] = Color3.fromRGB(80, 80, 90), -- 中性灰色
-            ["Color Theme"] = Color3.fromRGB(0, 120, 215), -- 高级感的蓝色
-            ["Color Text"] = Color3.fromRGB(230, 230, 230), -- 柔和的白色
-            ["Color Dark Text"] = Color3.fromRGB(190, 190, 190) -- 柔和的灰色
-
-
-
-		},
-		Dark = {
-			["Color Hub 1"] = ColorSequence.new({
-				ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 40)),
-				ColorSequenceKeypoint.new(0.50, Color3.fromRGB(47.5, 47.5, 47.5)),
-				ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 40))
-			}),
-			["Color Hub 2"] = Color3.fromRGB(45, 45, 45),
-			["Color Stroke"] = Color3.fromRGB(65, 65, 65),
-			["Color Theme"] = Color3.fromRGB(65, 150, 255),
-			["Color Text"] = Color3.fromRGB(245, 245, 245),
-			["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
-		},
-		Purple = {
+            ["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+            ["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+            ["Color Theme"] = Color3.fromRGB(88, 101, 242),
+            ["Color Text"] = Color3.fromRGB(243, 243, 243),
+            ["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
+        },
+        Dark = {
             ["Color Hub 1"] = ColorSequence.new({
-                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(50, 50, 60)), -- 深灰色调
-                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(70, 70, 80)), -- 中性灰色调
-                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(50, 50, 60)) -- 深灰色调
+                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(40, 40, 40)),
+                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(47.5, 47.5, 47.5)),
+                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(40, 40, 40))
             }),
-            ["Color Hub 2"] = Color3.fromRGB(60, 60, 70), -- 深灰色
-            ["Color Stroke"] = Color3.fromRGB(80, 80, 90), -- 中性灰色
-            ["Color Theme"] = Color3.fromRGB(0, 120, 215), -- 高级感的蓝色
-            ["Color Text"] = Color3.fromRGB(230, 230, 230), -- 柔和的白色
-            ["Color Dark Text"] = Color3.fromRGB(190, 190, 190) -- 柔和的灰色
-		}
-	},
-	Info = {
-		Version = "1.1.0"
-	},
-	Save = {
-		UISize = {450, 280},
-		TabSize = 160,
-		Theme = "Darker"
-	},
+            ["Color Hub 2"] = Color3.fromRGB(45, 45, 45),
+            ["Color Stroke"] = Color3.fromRGB(65, 65, 65),
+            ["Color Theme"] = Color3.fromRGB(65, 150, 255),
+            ["Color Text"] = Color3.fromRGB(245, 245, 245),
+            ["Color Dark Text"] = Color3.fromRGB(190, 190, 190)
+        },
+        Purple = {
+            ["Color Hub 1"] = ColorSequence.new({
+                ColorSequenceKeypoint.new(0.00, Color3.fromRGB(27.5, 25, 30)),
+                ColorSequenceKeypoint.new(0.50, Color3.fromRGB(32.5, 32.5, 32.5)),
+                ColorSequenceKeypoint.new(1.00, Color3.fromRGB(27.5, 25, 30))
+            }),
+            ["Color Hub 2"] = Color3.fromRGB(30, 30, 30),
+            ["Color Stroke"] = Color3.fromRGB(40, 40, 40),
+            ["Color Theme"] = Color3.fromRGB(150, 0, 255),
+            ["Color Text"] = Color3.fromRGB(240, 240, 240),
+            ["Color Dark Text"] = Color3.fromRGB(180, 180, 180)
+        }
+    },
+    Info = {
+        Version = "1.1.0"
+    },
+    Save = {
+        UISize = {550, 380},
+        TabSize = 160,
+        Theme = "Dark"
+    },
 	Settings = {},
 	Connection = {},
 	Instances = {},
@@ -1405,7 +1403,7 @@ end
 
 function redzlib:MakeWindow(Configs)
 	local WTitle = Configs[1] or Configs.Name or Configs.Title or "redz Library V5"
-	local WMiniText = Configs[2] or Configs.SubTitle or "作者: 神仇"
+	local WMiniText = Configs[2] or Configs.SubTitle or "by : redz9999"
 	
 	Settings.ScriptFile = Configs[3] or Configs.SaveFolder or false
 	
@@ -1425,18 +1423,61 @@ function redzlib:MakeWindow(Configs)
 		end
 	end;LoadFile()
 	
-	local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
-	local MainFrame = InsertTheme(Create("ImageButton", ScreenGui, {
-		Size = UDim2.fromOffset(UISizeX, UISizeY),
-		Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
-		BackgroundTransparency = 0.03,
-		Name = "Hub"
-	}), "Main")
-	Make("Gradient", MainFrame, {
-		Rotation = 45
-	})MakeDrag(MainFrame)
-	
-	local MainCorner = Make("Corner", MainFrame)
+local currentTheme = redzlib.Themes[redzlib.Save.Theme]
+
+local UISizeX, UISizeY = unpack(redzlib.Save.UISize)
+local MainFrame = Create("ImageButton", ScreenGui, {
+    Size = UDim2.fromOffset(UISizeX, UISizeY),
+    Position = UDim2.new(0.5, -UISizeX/2, 0.5, -UISizeY/2),
+    BackgroundTransparency = 0.03,
+    BackgroundColor3 = currentTheme["Color Hub 2"], 
+    Name = "Hub"
+})
+
+local bgGradient = Create("UIGradient", MainFrame)
+bgGradient.Color = currentTheme["Color Hub 1"]
+bgGradient.Rotation = 45
+
+MakeDrag(MainFrame)
+
+local MainCorner = Create("UICorner", MainFrame, {
+    CornerRadius = UDim.new(0, 6)
+})
+
+local RainbowStroke = Create("UIStroke", MainFrame, {
+    Thickness = 1.5,
+    ApplyStrokeMode = "Border",
+    Transparency = 0.5,
+    Color = currentTheme["Color Theme"] 
+})
+
+local RainbowGradient = Create("UIGradient", RainbowStroke, {
+    Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.00, currentTheme["Color Theme"]),
+        ColorSequenceKeypoint.new(0.25, currentTheme["Color Theme"]:Lerp(Color3.new(1, 1, 1), 0.3)),
+        ColorSequenceKeypoint.new(0.50, currentTheme["Color Theme"]),
+        ColorSequenceKeypoint.new(0.75, currentTheme["Color Theme"]:Lerp(Color3.new(0, 0, 0), 0.3)),
+        ColorSequenceKeypoint.new(1.00, currentTheme["Color Theme"])
+    }),
+    Rotation = 0
+})
+
+local RunService = game:GetService("RunService")
+local rotationSpeed = 40 
+
+RunService.Heartbeat:Connect(function(deltaTime)
+    RainbowGradient.Rotation = (RainbowGradient.Rotation + rotationSpeed * deltaTime) % 360
+end)
+
+function ApplyTheme(frame)
+    for _, child in ipairs(frame:GetDescendants()) do
+        if child:IsA("TextLabel") or child:IsA("TextButton") or child:IsA("TextBox") then
+            child.TextColor3 = currentTheme["Color Text"]
+        elseif child:IsA("Frame") or child:IsA("ScrollingFrame") then
+            child.BackgroundColor3 = currentTheme["Color Hub 2"]
+        end
+    end
+end
 	
 	local Components = Create("Folder", MainFrame, {
 		Name = "Components"
@@ -1452,33 +1493,67 @@ function redzlib:MakeWindow(Configs)
 		Name = "Top Bar"
 	})
 	
-	local Title = InsertTheme(Create("TextLabel", TopBar, {
-		Position = UDim2.new(0, 15, 0.5),
-		AnchorPoint = Vector2.new(0, 0.5),
-		AutomaticSize = "XY",
-		Text = WTitle,
-		TextXAlignment = "Left",
-		TextSize = 12,
-		TextColor3 = Theme["Color Text"],
-		BackgroundTransparency = 1,
-		Font = Enum.Font.GothamMedium,
-		Name = "Title"
-	}, {
-		InsertTheme(Create("TextLabel", {
-			Size = UDim2.fromScale(0, 1),
-			AutomaticSize = "X",
-			AnchorPoint = Vector2.new(0, 1),
-			Position = UDim2.new(1, 5, 0.9),
-			Text = WMiniText,
-			TextColor3 = Theme["Color Dark Text"],
-			BackgroundTransparency = 1,
-			TextXAlignment = "Left",
-			TextYAlignment = "Bottom",
-			TextSize = 8,
-			Font = Enum.Font.Gotham,
-			Name = "SubTitle"
-		}), "DarkText")
-	}), "Text")
+-- 在创建主标题的地方添加渐变效果
+local Title = InsertTheme(Create("TextLabel", TopBar, {
+    Position = UDim2.new(0, 15, 0.5),
+    AnchorPoint = Vector2.new(0, 0.5),
+    AutomaticSize = "XY",
+    Text = WTitle,
+    TextXAlignment = "Left",
+    TextSize = 12,
+    TextColor3 = Color3.new(1, 1, 1), -- 设置为白色以便渐变效果更明显
+    BackgroundTransparency = 1,
+    Font = Enum.Font.GothamMedium,
+    Name = "Title",
+    ZIndex = 2
+}, {
+    InsertTheme(Create("TextLabel", {
+        Size = UDim2.fromScale(0, 1),
+        AutomaticSize = "X",
+        AnchorPoint = Vector2.new(0, 1),
+        Position = UDim2.new(1, 5, 0.9),
+        Text = WMiniText,
+        TextColor3 = Theme["Color Dark Text"],
+        BackgroundTransparency = 1,
+        TextXAlignment = "Left",
+        TextYAlignment = "Bottom",
+        TextSize = 8,
+        Font = Enum.Font.Gotham,
+        Name = "SubTitle"
+    }), "DarkText")
+}), "Text")
+
+-- 更精致的标题栏效果
+local titleGradient = Create("UIGradient", Title, {
+    Color = ColorSequence.new({
+        ColorSequenceKeypoint.new(0.0, Color3.fromRGB(160, 40, 70)),   -- 深红宝石色
+        ColorSequenceKeypoint.new(0.25, Color3.fromRGB(120, 30, 100)), -- 深紫红色
+        ColorSequenceKeypoint.new(0.5, Color3.fromRGB(80, 60, 180)),   -- 皇家蓝紫色
+        ColorSequenceKeypoint.new(0.75, Color3.fromRGB(60, 100, 200)), -- 深天蓝色
+        ColorSequenceKeypoint.new(1.0, Color3.fromRGB(50, 80, 180))    -- 海军蓝
+    }),
+    Rotation = 0
+})
+
+-- 添加微妙的发光效果
+local titleGlow = Create("UIStroke", Title, {
+    Color = Color3.fromRGB(80, 100, 180),
+    Thickness = 1.2,
+    Transparency = 0.8
+})
+
+-- 动态光影效果
+local lightAngle = 0
+RunService.Heartbeat:Connect(function(delta)
+    -- 渐变旋转
+    titleGradient.Rotation = (titleGradient.Rotation + 45 * delta) % 360
+    
+    -- 光影效果
+    lightAngle = (lightAngle + delta * 60) % 360
+    local light = math.sin(math.rad(lightAngle)) * 0.2 + 0.8
+    titleGlow.Transparency = 0.3 + (1 - light) * 0.5
+end)
+
 	
 	local MainScroll = InsertTheme(Create("ScrollingFrame", Components, {
 		Size = UDim2.new(0, redzlib.Save.TabSize, 1, -TopBar.Size.Y.Offset),
@@ -1583,37 +1658,52 @@ function redzlib:MakeWindow(Configs)
 	local Window, FirstTab = {}, false
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
-			Title = "退出",
-			Text = "您想要关闭Xi Pro？",
+			Title = "Xi Pro",
+			Text = "你想要关闭脚本吗？",
 			Options = {
 				{"确认", function()
 					ScreenGui:Destroy()
 				end},
-				{"取消"}
+				{"反回"}
 			}
 		})
 	end
-	function Window:MinimizeBtn()
-		if WaitClick then return end
-		WaitClick = true
-		
-		if Minimized then
-			MinimizeButton.Image = "rbxassetid://10734896206"
-			CreateTween({MainFrame, "Size", SaveSize, 0.25, true})
-			ControlSize1.Visible = true
-			ControlSize2.Visible = true
-			Minimized = false
-		else
-			MinimizeButton.Image = "rbxassetid://10734924532"
-			SaveSize = MainFrame.Size
-			ControlSize1.Visible = false
-			ControlSize2.Visible = false
-			CreateTween({MainFrame, "Size", UDim2.fromOffset(MainFrame.Size.X.Offset, 28), 0.25, true})
-			Minimized = true
-		end
-		
-		WaitClick = false
-	end
+function Window:MinimizeBtn()
+    if WaitClick then return end
+    WaitClick = true
+    
+    if Minimized then
+        -- 还原窗口
+        MinimizeButton.Image = "rbxassetid://10734896206"
+        CreateTween({MainFrame, "Size", SaveSize, 0.25})
+        CreateTween({MainFrame, "Position", SavePosition, 0.25, true})
+        ControlSize1.Visible = true
+        ControlSize2.Visible = true
+        Minimized = false
+    else
+        -- 保存原始大小和位置
+        SaveSize = MainFrame.Size
+        SavePosition = MainFrame.Position
+        
+        -- 缩小窗口到标题栏并移到顶部中央
+        MinimizeButton.Image = "rbxassetid://10734924532"
+        ControlSize1.Visible = false
+        ControlSize2.Visible = false
+        
+        -- 计算缩小后的位置（顶部中央）
+        local screenWidth = workspace.CurrentCamera.ViewportSize.X
+        local newPosition = UDim2.new(
+            0.5, -100,  -- 水平居中（宽度200的一半）
+            0, 10        -- 顶部留10像素边距
+        )
+        
+        CreateTween({MainFrame, "Size", UDim2.fromOffset(200, 28), 0.25}) -- 宽度缩小到200
+        CreateTween({MainFrame, "Position", newPosition, 0.25, true})
+        Minimized = true
+    end
+    
+    WaitClick = false
+end
 	function Window:Minimize()
 		MainFrame.Visible = not MainFrame.Visible
 	end
@@ -2662,34 +2752,66 @@ function redzlib:MakeWindow(Configs)
 				Text = Desc
 			}), "DarkText")
 			
-			local JoinButton = Create("TextButton", FrameHolder, {
-				Size = UDim2.new(1, -14, 0, 16),
-				AnchorPoint = Vector2.new(0.5, 1),
-				Position = UDim2.new(0.5, 0, 1, -7),
-				Text = "Join",
-				Font = Enum.Font.GothamBold,
-				TextSize = 12,
-				TextColor3 = Color3.fromRGB(220, 220, 220),
-				BackgroundColor3 = Color3.fromRGB(50, 150, 50)
-			})Make("Corner", JoinButton, UDim.new(0, 5))
+local JoinButton = Make("TextButton", FrameHolder, {
+	Size = UDim2.new(1, -14, 0, 16),
+	AnchorPoint = Vector2.new(0.5, 1),
+	Position = UDim2.new(0.5, 0, 1, -7),
+	Text = "Join",
+	Font = Enum.Font.GothamBold,
+	TextSize = 12,
+	TextColor3 = Color3.fromRGB(220, 220, 220),
+	BackgroundColor3 = Color3.fromRGB(50, 150, 50),
+})
+Make("UICorner", JoinButton, { CornerRadius = UDim.new(0, 5) })
+
+local originalColor = JoinButton.BackgroundColor3
+JoinButton.MouseEnter:Connect(function()
+	TweenService:Create(JoinButton, TweenInfo.new(0.2), {
+		BackgroundColor3 = originalColor:Lerp(Color3.new(1, 1, 1), 0.2), 
+		Size = UDim2.new(1, -12, 0, 18) 
+	}):Play()
+end)
+
+JoinButton.MouseLeave:Connect(function()
+	TweenService:Create(JoinButton, TweenInfo.new(0.2), {
+		BackgroundColor3 = originalColor,
+		Size = UDim2.new(1, -14, 0, 16)
+	}):Play()
+end)
 			
-			local ClickDelay
-			JoinButton.Activated:Connect(function()
-				setclipboard(Invite)
-				if ClickDelay then return end
-				
-				ClickDelay = true
-				SetProps(JoinButton, {
-					Text = "Copied to Clipboard",
-					BackgroundColor3 = Color3.fromRGB(100, 100, 100),
-					TextColor3 = Color3.fromRGB(150, 150, 150)
-				})task.wait(5)
-				SetProps(JoinButton, {
-					Text = "Join",
-					BackgroundColor3 = Color3.fromRGB(50, 150, 50),
-					TextColor3 = Color3.fromRGB(220, 220, 220)
-				})ClickDelay = false
-			end)
+local ClickDelay
+JoinButton.Activated:Connect(function()
+	setclipboard(Invite)
+	if ClickDelay then return end
+	
+	ClickDelay = true
+	
+	local successColor = Color3.fromRGB(100, 100, 100)
+	local successTextColor = Color3.fromRGB(150, 150, 150)
+	local originalTextColor = JoinButton.TextColor3
+	
+	TweenService:Create(JoinButton, TweenInfo.new(0.3), {
+		BackgroundColor3 = successColor,
+		TextColor3 = successTextColor,
+		TextSize = 10,
+	}):Play()
+	
+	SetProps(JoinButton, { Text = "Copied to Clipboard" })
+	
+	task.wait(5)
+	
+	TweenService:Create(JoinButton, TweenInfo.new(0.3), {
+		BackgroundColor3 = originalColor,
+		TextColor3 = originalTextColor,
+		TextSize = 12,
+	}):Play()
+	
+	task.wait(0.3)
+	
+	SetProps(JoinButton, { Text = "Join" })
+	
+	ClickDelay = false
+end)
 			
 			local DiscordInvite = {}
 			function DiscordInvite:Destroy() InviteHolder:Destroy() end
