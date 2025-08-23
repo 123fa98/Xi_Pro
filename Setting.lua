@@ -16,6 +16,7 @@ local LoadServer = {
     "刀刃球",
     "压力",
     "在森林生存99夜",
+    "在超市生活一周",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
@@ -27,11 +28,11 @@ local LoadingSteps = {
     {text = "下载游戏数据...", progress = 75},
     {text = "解析配置文件...", progress = 85},
     {text = "准备游戏列表...", progress = 95},
-    {text = "神仇操牛的逼！", progress = 100}
+    {text = "鲨蛋操牛的逼！", progress = 100}
 }
 local Developers = {
-    {name = "神仇", role = "主作者", desc = "项目负责人 · 核心架构(123fa98儿子)", color = Color3.fromRGB(255, 100, 100)},
-    {name = "123fa98", role = "副作者", desc = "功能开发 · 代码优化", color = Color3.fromRGB(100, 255, 100)},
+    {name = "神仇", role = "主作者", desc = "项目负责人 · 核心架构", color = Color3.fromRGB(255, 100, 100)},
+    {name = "123fa98", role = "副作者", desc = "功能开发 · 代码优化（神仇的儿子）", color = Color3.fromRGB(100, 255, 100)},
     {name = "泡芙", role = "UI制作者", desc = "界面设计 · 用户体验", color = Color3.fromRGB(255, 200, 100)},
     {name = "Irena", role = "剪辑师", desc = "视频制作 · 宣传内容", color = Color3.fromRGB(255, 100, 255)},
     {name = "du8", role = "备用作者", desc = "代码维护 · 功能补充", color = Color3.fromRGB(100, 200, 255)},
