@@ -17,6 +17,7 @@ local LoadServer = {
     "压力",
     "在森林生存99夜",
     "在超市生活一周",
+    "死铁轨",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
