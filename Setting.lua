@@ -32,7 +32,7 @@ local LoadingSteps = {
     {text = "下载游戏数据...", progress = 75},
     {text = "解析配置文件...", progress = 85},
     {text = "准备游戏列表...", progress = 95},
-    {text = "神仇吃123fa98精液！", progress = 100}
+    {text = "神仇舔123fa98精液！", progress = 100}
 }
 local Developers = {
     {name = "神仇", role = "主作者", desc = "项目负责人 · 核心架构（123fa98的儿子）", color = Color3.fromRGB(255, 100, 100)},
