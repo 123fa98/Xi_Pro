@@ -3,6 +3,7 @@ local Notice = {
     {date = "2025-08-05", desc = "脚本用不了就受着呗\n玩Xi Pro就要学会受着"},
 }
 local LoadServer = {
+    "自动翻译"
     "Blox Fruit",
     "Fisch",
     "Doors",
