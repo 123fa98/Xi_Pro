@@ -22,7 +22,7 @@ local LoadServer = {
     "死铁轨",
     "汽车经销大亨",
     "生存七天",
-    "被遗弃",
+    "被遗弃"
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
