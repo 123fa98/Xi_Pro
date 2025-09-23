@@ -23,7 +23,7 @@ local LoadServer = {
     "死铁轨",
     "汽车经销大亨",
     "生存七天",
-    "Forsaken"
+    "柔术无限"
 }
 
 local LoadingSteps = {
