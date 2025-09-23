@@ -2,7 +2,7 @@ local LoadingSteps, Notice, LoadServer, Developers, List = loadstring(game:HttpG
 local redzlib = loadstring(game:HttpGet("https://pastefy.app/5PiSO8oW/raw"))()
 local Window = redzlib:MakeWindow({
     Title = "XI Pro 汉化中心",
-    SubTitle = "SubTitle",
+    SubTitle = "By Xi.team",
     SaveFolder = "Redz Config"
 })
 
@@ -12,5 +12,10 @@ local Tab = Window:MakeTab({
 })
 
 for Name, Link in List do
-    print(Name, Link)
+    Tab:AddButton({
+        Name = Name, 
+        Callback = function()
+            loadstring(Link)()
+        end
+    })
 end
