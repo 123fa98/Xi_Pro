@@ -45,6 +45,6 @@ local Developers = {
     {name = "小天", role = "黑客", desc = "技术研究 · 安全测试", color = Color3.fromRGB(255, 150, 200)}
 }
 local List = {
-    ["sn"] = "sb",
+    ["自动翻译"] = "https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/自动翻译.lua",
 }
 return LoadingSteps, Notice, LoadServer, Developers, List
