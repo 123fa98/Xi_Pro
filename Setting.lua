@@ -46,5 +46,7 @@ local Developers = {
 }
 local List = {
     ["自动翻译"] = "https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/自动翻译.lua",
+    ["力量传奇-Muscle Legends"] = "https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/力量传奇-Muscle Legends.lua",
+    
 }
 return LoadingSteps, Notice, LoadServer, Developers, List
