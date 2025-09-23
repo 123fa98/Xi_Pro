@@ -3,7 +3,7 @@ local Notice = {
     {date = "2025-08-05", desc = "脚本用不了就受着呗\n玩Xi Pro就要学会受着"},
 }
 local LoadServer = {
-    "自动翻译",
+    "汉化中心",
     "Blox Fruit",
     "Fisch",
     "Doors",
@@ -44,4 +44,7 @@ local Developers = {
     {name = "qumu", role = "白名单制作者", desc = "安全系统 · 权限管理", color = Color3.fromRGB(200, 255, 100)},
     {name = "小天", role = "黑客", desc = "技术研究 · 安全测试", color = Color3.fromRGB(255, 150, 200)}
 }
-return LoadingSteps, Notice, LoadServer, Developers
+local List = {
+    ["sn"] = "sb",
+}
+return LoadingSteps, Notice, LoadServer, Developers, List
