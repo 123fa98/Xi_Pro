@@ -1,4 +1,4 @@
-local List = List
+local LoadingSteps, Notice, LoadServer, Developers, List = loadstring(game:HttpGet('https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/Setting.lua'))()
 local redzlib = loadstring(game:HttpGet("https://pastefy.app/5PiSO8oW/raw"))()
 local Window = redzlib:MakeWindow({
     Title = "XI Pro 汉化中心",
@@ -12,5 +12,5 @@ local Tab = Window:MakeTab({
 })
 
 for Name, Link in List do
-  print(Name, Link)
+    print(Name, Link)
 end
