@@ -23,7 +23,6 @@ local LoadServer = {
     "汽车经销大亨",
     "生存七天",
     "柔术无限",
-    "柔术无限",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
