@@ -4,6 +4,7 @@ local Notice = {
 }
 local LoadServer = {
     "汉化中心",
+    "被遗弃",
     "Blox Fruit",
     "Fisch",
     "Doors",
