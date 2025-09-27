@@ -29,6 +29,7 @@ local LoadServer = {
     "Da hood",
     "一路向西",
     "nico的机器人",
+    "恐鬼症",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
