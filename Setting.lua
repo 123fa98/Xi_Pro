@@ -27,6 +27,7 @@ local LoadServer = {
     "力量传奇",
     "极速传奇",
     "Da hood",
+    "一路向西",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
