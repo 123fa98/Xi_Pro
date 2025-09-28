@@ -34,6 +34,7 @@ local LoadServer = {
     "彩虹朋友2",
     "格蕾丝",
     "Ne HUB",
+    "跳跃对决",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
