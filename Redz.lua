@@ -1659,12 +1659,12 @@ end)
 	function Window:CloseBtn()
 		local Dialog = Window:Dialog({
 			Title = "Xi Pro",
-			Text = "你想要关闭脚本吗？",
+			Text = "Do you want to close script?\n你想要关闭脚本吗?",
 			Options = {
-				{"确认", function()
+				{"Sure - 确认", function()
 					ScreenGui:Destroy()
 				end},
-				{"反回"}
+				{"Back - 返回"}
 			}
 		})
 	end
