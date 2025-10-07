@@ -38,6 +38,7 @@ local LoadServer = {
     "猎杀僵尸",
     "ST封锁战线",
     "躲避",
+    "砍伐树木",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
