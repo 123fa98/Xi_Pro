@@ -39,6 +39,7 @@ local LoadServer = {
     "ST封锁战线",
     "躲避",
     "砍伐树木",
+    "植物大战脑红",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
