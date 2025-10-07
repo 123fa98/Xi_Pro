@@ -40,6 +40,7 @@ local LoadServer = {
     "躲避",
     "砍伐树木",
     "植物大战脑红",
+    "建造动物园",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
