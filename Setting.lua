@@ -42,6 +42,7 @@ local LoadServer = {
     "植物大战脑红",
     "建造动物园",
     "内脏与黑火药",
+    "奇怪枪械",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
