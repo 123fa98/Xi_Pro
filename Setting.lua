@@ -43,6 +43,7 @@ local LoadServer = {
     "建造动物园",
     "内脏与黑火药",
     "奇怪枪械",
+    "偷走脑红",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
