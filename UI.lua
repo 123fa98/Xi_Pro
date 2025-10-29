@@ -10785,13 +10785,13 @@ local a a={cache={}, load=function(b)if not a.cache[b]then a.cache[b]={c=a[b]()}
 	Content="确定要关闭Atomic吗?",
 	Buttons={
 	{
-	Title="Cancel",
+	Title="取消",
 	
 	Callback=function()end,
 	Variant="Secondary",
 	},
 	{
-	Title="Close Window",
+	Title="关闭",
 	
 	Callback=function()aq:Close():Destroy()end,
 	Variant="Primary",
