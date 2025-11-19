@@ -10,6 +10,7 @@ local LoadServer = {
     "战斗勇士",
     "内脏与黑火药",
     "终极战场",
+    "在森林中的99页",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
