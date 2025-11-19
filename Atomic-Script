@@ -1,3 +1,24 @@
+local GroupID = 901078720
+local KickMessage = "请先加入Atomic群组!\n已自动为你复制群组名字请在剪贴板查看"
+
+local function CheckGroup()
+    local success, result = pcall(function()
+        return game:GetService("Players").LocalPlayer:IsInGroup(GroupID)
+    end)
+    
+    if not success then
+        warn("群组验证失败:", result)
+        return false
+    end
+    
+    return result
+end
+
+if not CheckGroup() then
+    setclipboard("群组名字:Xi_Script，XiProQQ主群:102679030")
+    game.Players.LocalPlayer:Kick(KickMessage)
+    return
+end
 
 local LoadingSteps, Notice, LoadServer, Developers, List = loadstring(game:HttpGet('https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/Setting.lua'))()
 
