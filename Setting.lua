@@ -11,6 +11,7 @@ local LoadServer = {
     "内脏与黑火药",
     "终极战场",
     "在森林中的99夜",
+    "战斗勇士绕作弊（先注入这个）",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
