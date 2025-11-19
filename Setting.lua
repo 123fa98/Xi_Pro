@@ -9,6 +9,7 @@ local LoadServer = {
     "Blox Fruit",
     "战斗勇士",
     "内脏与黑火药",
+    "终极战场",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
@@ -26,9 +27,5 @@ local Developers = {
     {name = "神仇", role = "主作者", desc = "项目负责人 · 核心架构", color = Color3.fromRGB(255, 100, 100)},
     {name = "麥克丰", role = "副作者", desc = "功能开发 · 代码优化", color = Color3.fromRGB(100, 255, 100)},
 }
-local List = {
-    ["自动翻译"] = "https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/自动翻译.lua",
-    ["力量传奇-Muscle Legends"] = "https://raw.githubusercontent.com/123fa98/Xi_Pro/refs/heads/main/力量传奇-Muscle Legends.lua",
-    
-}
-return LoadingSteps, Notice, LoadServer, Developers, List 
+
+return LoadingSteps, Notice, LoadServer, Developers
