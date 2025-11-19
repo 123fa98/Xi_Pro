@@ -8,6 +8,7 @@ local LoadServer = {
     "一路向西",
     "Blox Fruit",
     "战斗勇士",
+    "内脏与黑火药",
 }
 local LoadingSteps = {
     {text = "正在初始化系统...", progress = 0},
