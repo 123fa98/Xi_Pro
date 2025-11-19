@@ -15,7 +15,7 @@ local function CheckGroup()
 end
 
 if not CheckGroup() then
-    setclipboard("群组名字:Xi_Script，XiProQQ主群:102679030")
+    setclipboard("Xi_Script")
     game.Players.LocalPlayer:Kick(KickMessage)
     return
 end
