@@ -1139,28 +1139,4 @@ function library.new(library, name, theme)
 	end
 	return window
 end
-local win = library:new("名字")
-local tab = win:Tab("测试", "图片id")
-local section = tab:section("控件测试", true)
-
-section:Button("按钮", function()
-    
-end)
-section:Label("这是一个标签")
-section:Toggle("开关", "AutoFeature", false, function(state)
-    
-end)
-
-section:Keybind("功能键", "LeftControl", function(key)
-end)
-
-section:Textbox("输入文本", "TextFlag", "默认值", function(text)
-end)
-
-section:Slider("滑块", "Volume", 50, 0, 100, false, function(value)
-   
-end)
-
-section:Dropdown("选择选项", "OptionFlag", {"选项1", "选项2", "选项3"}, function(selected)
-   
-end)
+return library
