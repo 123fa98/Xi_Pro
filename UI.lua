@@ -82,17 +82,63 @@ local d=b(game:GetService"RunService")
 local e=b(game:GetService"UserInputService")
 local f=b(game:GetService"TweenService")
 local g=b(game:GetService"LocalizationService")
-local h=b(game:GetService"HttpService")local i=
-
-d.Heartbeat
+local h=b(game:GetService"HttpService")
+local i=d.Heartbeat
 
 local j="https://raw.githubusercontent.com/Footagesus/Icons/main/Main-v2.lua"
 
-local l=loadstring(
-game.HttpGetAsync and game:HttpGetAsync(j)
-or h:GetAsync(j)
-)()
-l.SetIconsType"lucide"
+local function safeHttpGet(url, timeout)
+	timeout = timeout or 10
+	local success, result = pcall(function()
+		local startTime = tick()
+		local response
+		if game.HttpGetAsync then
+			response = game:HttpGetAsync(url)
+		else
+			response = h:GetAsync(url)
+		end
+		if tick() - startTime > timeout then
+			error("Request timeout")
+		end
+		return response
+	end)
+	if success then
+		return result
+	else
+		warn("Failed to load icons:", result)
+		return nil
+	end
+end
+
+local l
+local iconsLoaded = false
+task.spawn(function()
+	local iconsCode = safeHttpGet(j)
+	if iconsCode then
+		local success, iconsModule = pcall(function()
+			return loadstring(iconsCode)()
+		end)
+		if success and iconsModule then
+			l = iconsModule
+			pcall(function()
+				if l and l.SetIconsType then
+					l:SetIconsType("lucide")
+				end
+			end)
+			iconsLoaded = true
+		else
+			warn("Failed to load icons module")
+		end
+	end
+end)
+
+-- 如果加载失败，创建一个占位符
+if not l then
+	l = {
+		SetIconsType = function() end,
+		GetIcon = function() return "" end
+	}
+end
 
 local m
 
@@ -1200,7 +1246,16 @@ repeat task.wait(1)until game:IsLoaded();
 
 
 local aj=false;
-local ak,al,am,an,ao,ap,aq,ar,as=setclipboard or toclipboard,request or http_request or syn_request,string.char,tostring,string.sub,os.time,math.random,math.floor,gethwid or function()return ac(game:GetService"Players").LocalPlayer.UserId end
+local ak,al,am,an,ao,ap,aq,ar,as=setclipboard or toclipboard,request or http_request or syn_request,string.char,tostring,string.sub,os.time,math.random,math.floor,gethwid or function()
+	local success, result = pcall(function()
+		local players = ac(game:GetService"Players")
+		if players and players.LocalPlayer then
+			return players.LocalPlayer.UserId
+		end
+		return 0
+	end)
+	return success and result or 0
+end
 local at,au="",0;
 
 
@@ -1462,7 +1517,16 @@ local ac={}
 
 
 function ac.New(ad)
-local ae=gethwid or function()return aa(game:GetService"Players").LocalPlayer.UserId end
+local ae=gethwid or function()
+	local success, result = pcall(function()
+		local players = aa(game:GetService"Players")
+		if players and players.LocalPlayer then
+			return players.LocalPlayer.UserId
+		end
+		return 0
+	end)
+	return success and result or 0
+end
 local af,ag=request or http_request or syn_request,setclipboard or toclipboard
 
 function ValidateKey(ah)
@@ -1535,15 +1599,61 @@ local aa={}
 function aa.New(ab,ac)
 local ad="https://sdkapi-public.luarmor.net/library.lua"
 
-local ae=loadstring(
-game.HttpGetAsync and game:HttpGetAsync(ad)
-or HttpService:GetAsync(ad)
-)()
+
+local ae = nil
+local aeLoaded = false
+local HttpService = game:GetService("HttpService")
+
+task.spawn(function()
+	local success, result = pcall(function()
+		local startTime = tick()
+		local response
+		if game.HttpGetAsync then
+			response = game:HttpGetAsync(ad)
+		else
+			response = HttpService:GetAsync(ad)
+		end
+		if tick() - startTime > 10 then
+			error("Request timeout")
+		end
+		return loadstring(response)()
+	end)
+	if success and result then
+		ae = result
+		ae.script_id = ab
+		aeLoaded = true
+	else
+		warn("[Pelinda] Failed to load library:", result)
+		-- 创建占位符以避免错误
+		ae = {
+			script_id = ab,
+			check_key = function()
+				return {code = "LOAD_ERROR", message = "Library failed to load"}
+			end
+		}
+		aeLoaded = true
+	end
+end)
+
+-- 等待库加载完成（非阻塞方式）
+local function waitForLibrary()
+	local startTime = tick()
+	while not aeLoaded and tick() - startTime < 5 do
+		task.wait(0.1)
+	end
+	return ae ~= nil
+end
+
 local af=setclipboard or toclipboard
 
-ae.script_id=ab
-
 function ValidateKey(ag)
+-- 确保库已加载
+if not aeLoaded then
+	waitForLibrary()
+end
+if not ae then
+	return false, "Library failed to load"
+end
 local ah=ae.check_key(ag);
 
 
@@ -2692,22 +2802,54 @@ task.spawn(render)
 end
 
 local function renderOnChange()
+for ak,al in pairs(ah)do
+pcall(function()
+if al and al.Disconnect then
+al:Disconnect()
+end
+end)
+end
+ah={}
+
 local ak=aa(game:GetService"Workspace").CurrentCamera
 if not ak then
 return
 end
 
-table.insert(ah,ak:GetPropertyChangedSignal"CFrame":Connect(render))
-table.insert(ah,ak:GetPropertyChangedSignal"ViewportSize":Connect(render))
-table.insert(ah,ak:GetPropertyChangedSignal"FieldOfView":Connect(render))
+local success, cframeConn = pcall(function()
+return ak:GetPropertyChangedSignal"CFrame":Connect(render)
+end)
+if success and cframeConn then
+table.insert(ah,cframeConn)
+end
+
+local success2, viewportConn = pcall(function()
+return ak:GetPropertyChangedSignal"ViewportSize":Connect(render)
+end)
+if success2 and viewportConn then
+table.insert(ah,viewportConn)
+end
+
+local success3, fovConn = pcall(function()
+return ak:GetPropertyChangedSignal"FieldOfView":Connect(render)
+end)
+if success3 and fovConn then
+table.insert(ah,fovConn)
+end
+
 task.spawn(render)
 end
 
 aj.Destroying:Connect(function()
-for ak,al in ah do
+for ak,al in pairs(ah)do
 pcall(function()
+if al and al.Disconnect then
 al:Disconnect()
+end
 end)
+end
+for k in pairs(ah)do
+ah[k]=nil
 end
 end)
 
@@ -2914,15 +3056,40 @@ ad[ae]={enabled=ae.Enabled}
 end
 end
 
-for ae,af in pairs(aa(game:GetService"Lighting"):GetChildren())do
-register(af)
+-- 分块迭代器辅助函数，防止阻塞
+local function chunkedIterate(collection, callback, chunkSize)
+	chunkSize = chunkSize or 500
+	local items = {}
+	for item in pairs(collection) do
+		table.insert(items, item)
+	end
+	
+	local processed = 0
+	for i = 1, #items do
+		pcall(callback, items[i])
+		processed = processed + 1
+		if processed >= chunkSize then
+			task.wait()
+			processed = 0
+		end
+	end
 end
 
-if aa(game:GetService"Workspace").CurrentCamera then
-for ag,ah in pairs(aa(game:GetService"Workspace").CurrentCamera:GetChildren())do
-register(ah)
-end
-end
+-- 使用分块迭代处理 Lighting
+local lightingService = pcall(function()
+	local lighting = aa(game:GetService"Lighting")
+	if lighting then
+		chunkedIterate(lighting:GetChildren(), register)
+	end
+end)
+
+-- 使用分块迭代处理 CurrentCamera
+pcall(function()
+	local workspace = aa(game:GetService"Workspace")
+	if workspace and workspace.CurrentCamera then
+		chunkedIterate(workspace.CurrentCamera:GetChildren(), register)
+	end
+end)
 end
 
 registerDefaults()
@@ -8996,7 +9163,21 @@ end,
 local aa=(cloneref or clonereference or function(aa)return aa end)
 
 aa(game:GetService"UserInputService")
-local ae=game.Players.LocalPlayer:GetMouse()
+local ae
+pcall(function()
+	local players = game:GetService"Players"
+	if players and players.LocalPlayer then
+		ae = players.LocalPlayer:GetMouse()
+	end
+end)
+if not ae then
+	ae = {
+		X = 0,
+		Y = 0,
+		Hit = nil,
+		Target = nil
+	}
+end
 
 local af=a.load'b'
 local ah=af.New
@@ -10605,13 +10786,24 @@ end
 
 local aA
 if as.User then
-local function GetUserThumb()local
-aB, aC=aa(game:GetService"Players"):GetUserThumbnailAsync(
-as.User.Anonymous and 1 or game.Players.LocalPlayer.UserId,
-Enum.ThumbnailType.HeadShot,
-Enum.ThumbnailSize.Size420x420
-)
-return aB
+local function GetUserThumb()
+	local success, thumbUrl = pcall(function()
+		local players = aa(game:GetService"Players")
+		local userId = 1
+		if not as.User.Anonymous then
+			local localPlayer = game:GetService"Players".LocalPlayer
+			if localPlayer then
+				userId = localPlayer.UserId
+			end
+		end
+		local thumbUrl, isReady = players:GetUserThumbnailAsync(
+			userId,
+			Enum.ThumbnailType.HeadShot,
+			Enum.ThumbnailSize.Size420x420
+		)
+		return thumbUrl
+	end)
+	return success and thumbUrl or ""
 end
 
 
@@ -10674,7 +10866,13 @@ AutomaticSize="XY",
 BackgroundTransparency=1,
 },{
 ak("TextLabel",{
-Text=as.User.Anonymous and"Anonymous"or game.Players.LocalPlayer.DisplayName,
+Text=as.User.Anonymous and"Anonymous"or (function()
+	local success, name = pcall(function()
+		local localPlayer = game:GetService"Players".LocalPlayer
+		return localPlayer and localPlayer.DisplayName or "Player"
+	end)
+	return success and name or "Player"
+end)(),
 TextSize=17,
 ThemeTag={
 TextColor3="Text",
@@ -10688,7 +10886,13 @@ TextXAlignment="Left",
 Name="DisplayName"
 }),
 ak("TextLabel",{
-Text=as.User.Anonymous and"anonymous"or game.Players.LocalPlayer.Name,
+Text=as.User.Anonymous and"anonymous"or (function()
+	local success, name = pcall(function()
+		local localPlayer = game:GetService"Players".LocalPlayer
+		return localPlayer and localPlayer.Name or "Player"
+	end)
+	return success and name or "Player"
+end)(),
 TextSize=15,
 TextTransparency=.6,
 ThemeTag={
@@ -10734,8 +10938,16 @@ function as.User.SetAnonymous(aB,aC)
 if aC~=false then aC=true end
 as.User.Anonymous=aC
 aA.UserIcon.ImageLabel.Image=GetUserThumb()
-aA.UserIcon.Frame.DisplayName.Text=aC and"Anonymous"or game.Players.LocalPlayer.DisplayName
-aA.UserIcon.Frame.UserName.Text=aC and"anonymous"or game.Players.LocalPlayer.Name
+pcall(function()
+	local localPlayer = game:GetService"Players".LocalPlayer
+	if localPlayer then
+		aA.UserIcon.Frame.DisplayName.Text = aC and"Anonymous"or localPlayer.DisplayName
+		aA.UserIcon.Frame.UserName.Text = aC and"anonymous"or localPlayer.Name
+	else
+		aA.UserIcon.Frame.DisplayName.Text = "Anonymous"
+		aA.UserIcon.Frame.UserName.Text = "anonymous"
+	end
+end)
 end
 
 if as.User.Enabled then
@@ -12168,9 +12380,16 @@ aa.cloneref=ae
 
 local af=ae(game:GetService"HttpService")
 local ah=ae(game:GetService"Players")
-local aj=ae(game:GetService"CoreGui")local ak=
+local aj
+pcall(function()
+	aj = ae(game:GetService"CoreGui")
+end)
+local ak=
 
-ah.LocalPlayer or nil
+local localPlayer
+pcall(function()
+	localPlayer = ah.LocalPlayer
+end)
 
 local al=af:JSONDecode(a.load'i')
 if al then
@@ -12193,7 +12412,24 @@ local ar=a.load'q'
 
 local as=protectgui or(syn and syn.protect_gui)or function()end
 
-local au=gethui and gethui()or(aj or game.Players.LocalPlayer:WaitForChild"PlayerGui")
+local au
+pcall(function()
+	au = gethui and gethui() or aj
+	if not au then
+		local players = game:GetService"Players"
+		if players and players.LocalPlayer then
+			au = players.LocalPlayer:WaitForChild"PlayerGui"
+		end
+	end
+end)
+if not au then
+	-- 如果无法获取 GUI，创建一个临时的 ScreenGui
+	au = Instance.new("ScreenGui")
+	au.Name = "WindUI_Fallback"
+	pcall(function()
+		au.Parent = game:GetService"CoreGui"
+	end)
+end
 
 local av=ap("UIScale",{
 Scale=aa.Scale,
@@ -12417,7 +12653,13 @@ ao.SetTheme(aB)
 
 
 local aC=gethwid or function()
-return ah.LocalPlayer.UserId
+	local success, userId = pcall(function()
+		if ah and ah.LocalPlayer then
+			return ah.LocalPlayer.UserId
+		end
+		return 0
+	end)
+	return success and userId or 0
 end
 
 local aD=aC()
